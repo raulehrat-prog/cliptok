@@ -287,29 +287,34 @@ async function gerarClips() {
   resultado.innerHTML = "⏳ Gerando cortes automáticos... pode demorar um pouco";
 
   try {
-    await fetch("http://localhost:3000/process", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        link: url,
-        platform: "youtube"
-      })
-    });
+  const res = await fetch("https://cliptok-api.onrender.com/process", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    link: url,
+    platform: "youtube"
+  })
+});
 
+const data = await res.json();
+
+if (data.error) {
+  throw new Error(data.error);
+}
     loader.style.display = "none";
 
     // mostrar vídeos
-    let html = "<h3>🎬 Seus cortes:</h3>";
+   let html = "<h3>🎬 Seus cortes:</h3>";
 
-    for (let i = 0; i < 5; i++) {
-      html += `
-        <video controls style="margin-top:10px;">
-          <source src="http://localhost:3000/clips/clip_${i}.mp4" type="video/mp4">
-        </video>
-      `;
-    }
+data.clips.forEach(c => {
+  html += `
+    <video controls style="margin-top:10px;">
+      <source src="https://cliptok-api.onrender.com${c}" type="video/mp4">
+    </video>
+  `;
+});
 
     resultado.innerHTML = html;
 
