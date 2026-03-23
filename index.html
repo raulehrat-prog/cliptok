@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClipTok - Baixar Vídeos do TikTok Online</title>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1752703671921438" crossorigin="anonymous"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1752703671921438",
+    enable_page_level_ads: true
+  });
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f0f0f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  margin-top: 40px;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 20px 10px;
+  }
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  background: #fff;
+  color: #000;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-main {
+  background: #00c853;
+  color: white;
+}
+
+.btn-tiktok {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #ff0050, #00f2ea);
+  color: white;
+  margin-top: 10px;
+}
+
+.video-box { margin-top: 15px; }
+video { width: 100%; border-radius: 8px; }
+
+.ads-box {
+  margin-top: 15px;
+  padding: 15px;
+  background: #222;
+  border-radius: 10px;
+  min-height: 100px;
+}
+
+/* --- SEÇÃO DE CONTEÚDO PARA APROVAÇÃO (SEO) --- */
+.content-wrapper {
+  max-width: 600px;
+  width: 90%;
+  margin: 40px auto;
+  text-align: left;
+  background: #161616;
+  padding: 25px;
+  border-radius: 12px;
+  border-top: 3px solid #00c853;
+}
+
+.content-wrapper h2 { color: #00c853; font-size: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+.content-wrapper h3 { color: #ff0050; font-size: 17px; margin-top: 20px; }
+.content-wrapper p { color: #bbb; line-height: 1.6; font-size: 14px; }
+.content-wrapper ul { color: #bbb; font-size: 14px; padding-left: 20px; }
+.content-wrapper li { margin-bottom: 8px; }
+
+footer {
+  text-align: center;
+  padding: 40px 20px 150px 20px;
+  font-size: 12px;
+  color: #444;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>ClipTok</h2>
+  <p style="font-size: 14px; color: #888;">Download de vídeos rápido e seguro</p>
+
+  <input id="link" placeholder="Cole o link do TikTok aqui..." />
+  <button class="btn-main" onclick="baixar()">BUSCAR VÍDEO</button>
+
+<button class="btn-main" style="margin-top:10px;background:#ff9800" onclick="gerarClips()">
+  ✂️ Gerar cortes automáticos (YouTube)
+</button>
+
+  <div id="loader" style="display:none;margin-top:10px;">⏳ Processando link...</div>
+  <div id="resultado"></div>
+
+  <div class="ads-box">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-1752703671921438"
+         data-ad-slot="9423934843"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+<div class="content-wrapper">
+  <h2>O que é o ClipTok?</h2>
+  <p>O <strong>ClipTok</strong> é uma plataforma online independente que permite aos usuários baixar vídeos do TikTok diretamente para seus dispositivos. Nossa missão é oferecer uma ferramenta simples, gratuita e rápida para que você possa salvar seus conteúdos favoritos e assisti-los mesmo quando estiver sem internet.</p>
+  
+  <h3>Como funciona?</h3>
+  <p>Nosso sistema analisa o link fornecido e extrai o endereço direto do arquivo de mídia. Tudo acontece em segundos, sem a necessidade de criar contas ou fornecer dados pessoais. Basta copiar, colar e baixar.</p>
+
+  <h2>Termos de Uso</h2>
+  <p>Ao utilizar o ClipTok, você declara estar ciente de que:</p>
+  <ul>
+    <li>Esta ferramenta deve ser usada exclusivamente para fins de backup pessoal ou visualização offline.</li>
+    <li>O ClipTok não armazena, hospeda ou redistribui nenhum vídeo em seus servidores; somos apenas um intermediário técnico.</li>
+    <li>Você assume total responsabilidade legal pelo uso do conteúdo baixado, comprometendo-se a respeitar os direitos autorais e as licenças dos criadores originais do TikTok.</li>
+    <li>O uso automatizado (bots) do nosso serviço é estritamente proibido.</li>
+  </ul>
+
+  <h2>Política de Privacidade</h2>
+  <p>Sua privacidade é fundamental para nós. No ClipTok:</p>
+  <ul>
+    <li>Não coletamos informações de identificação pessoal dos nossos usuários.</li>
+    <li>Utilizamos o <strong>Google AdSense</strong> para exibir anúncios. O Google pode usar cookies (como o cookie DART) para exibir anúncios baseados em suas visitas a este e outros sites na internet.</li>
+    <li>Você pode optar por desativar o uso do cookie DART visitando a Política de Privacidade da rede de anúncios do Google.</li>
+    <li>Nós não temos acesso aos cookies utilizados por anunciantes de terceiros.</li>
+  </ul>
+</div>
+
+<footer>
+  <p>&copy; 2026 ClipTok - Todos os direitos reservados.</p>
+</footer>
+
+<script>
+// 🔐 Lógica VIP e Mobile
+const params = new URLSearchParams(window.location.search);
+if (params.get("vip") === "1") localStorage.setItem("vip", "true");
+if (params.get("vip") === "0") localStorage.removeItem("vip");
+
+const isVIP = localStorage.getItem("vip") === "true";
+
+function isMobile() {
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+async function baixar() {
+  const url = document.getElementById("link").value;
+  const loader = document.getElementById("loader");
+  const resultado = document.getElementById("resultado");
+
+  if (!url) { alert("Por favor, insira um link!"); return; }
+
+  resultado.innerHTML = "";
+  loader.style.display = "block";
+
+  try {
+    const res = await fetch("/api/tiktok", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url })
+    });
+
+    const data = await res.json();
+    loader.style.display = "none";
+
+    if (data.video) {
+      resultado.innerHTML = `
+        <div class="video-box">
+          <video controls src="${data.video}"></video>
+        </div>
+        <button id="btnDownload" class="btn-tiktok">
+          ${isVIP ? "⬇️ Baixar vídeo agora" : "🎬 Assistir anúncio para baixar"}
+        </button>
+        <div id="adsArea"></div>
+      `;
+
+      document.getElementById("btnDownload").onclick = function () {
+        if (isVIP) {
+          baixarVideo(data.video);
+        } else {
+          mostrarAnuncio(data.video);
+        }
+      };
+    } else {
+      resultado.innerHTML = "<p style='color:red'>Erro: Vídeo não encontrado ou link inválido.</p>";
+    }
+  } catch (err) {
+    loader.style.display = "none";
+    resultado.innerHTML = "<p style='color:red'>Erro de conexão com o servidor.</p>";
+  }
+}
+
+function mostrarAnuncio(videoUrl) {
+  const adsArea = document.getElementById("adsArea");
+  adsArea.innerHTML = `
+    <div class="ads-box">
+      <p style="font-size:13px; color:#00c853;">📢 Aguarde 5 segundos para liberar o download...</p>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-1752703671921438"
+           data-ad-slot="9423934843"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <div id="liberarBtn" style="display:none;margin-top:10px;">
+        <button class="btn-tiktok" onclick="baixarVideo('${videoUrl}')">⬇️ Baixar agora</button>
+      </div>
+    </div>
+  `;
+  
+  setTimeout(() => {
+    try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+  }, 500);
+
+  setTimeout(() => {
+    document.getElementById("liberarBtn").style.display = "block";
+  }, 5000);
+}
+
+function baixarVideo(url) {
+  window.open(`/api/download?url=${encodeURIComponent(url)}`, "_blank");
+}
+</script>
+
+<div style="position:fixed;bottom:0;width:100%;z-index:999; text-align:center;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-1752703671921438"
+       data-ad-slot="9423934843"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<script>
+async function gerarClips() {
+  const url = document.getElementById("link").value;
+  const resultado = document.getElementById("resultado");
+  const loader = document.getElementById("loader");
+
+  if (!url) {
+    alert("Cole um link primeiro!");
+    return;
+  }
+
+  loader.style.display = "block";
+  resultado.innerHTML = "⏳ Gerando cortes automáticos... pode demorar um pouco";
+
+  try {
+    await fetch("http://localhost:3000/process", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        link: url,
+        platform: "youtube"
+      })
+    });
+
+    loader.style.display = "none";
+
+    // mostrar vídeos
+    let html = "<h3>🎬 Seus cortes:</h3>";
+
+    for (let i = 0; i < 5; i++) {
+      html += `
+        <video controls style="margin-top:10px;">
+          <source src="http://localhost:3000/clips/clip_${i}.mp4" type="video/mp4">
+        </video>
+      `;
+    }
+
+    resultado.innerHTML = html;
+
+  } catch (err) {
+    loader.style.display = "none";
+    resultado.innerHTML = "<p style='color:red'>Erro ao gerar clips</p>";
+  }
+}
+</script>
+
+</div>
+
+</body>
+</html>
