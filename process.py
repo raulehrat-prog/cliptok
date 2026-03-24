@@ -5,17 +5,19 @@ import yt_dlp
 link = sys.argv[1]
 platform = sys.argv[2].lower()
 
-# 🔥 limpa clips antigos
+# 🔥 limpa clips
 if os.path.exists("clips"):
     for f in os.listdir("clips"):
         os.remove(os.path.join("clips", f))
 else:
     os.makedirs("clips")
 
-# 🔥 caminho único
+if not os.path.exists("videos"):
+    os.makedirs("videos")
+
 video_path = f"videos/video_{os.getpid()}.mp4"
 
-# 🔽 DOWNLOAD
+# DOWNLOAD
 if platform == "youtube":
     ydl_opts = {
         'outtmpl': video_path,
@@ -25,21 +27,37 @@ if platform == "youtube":
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([link])
 else:
-    print("Use apenas youtube por enquanto")
+    print("erro")
     sys.exit()
 
-# 🔽 TRANSCRIÇÃO
+# TRANSCRIÇÃO
 model = whisper.load_model("tiny")
 result = model.transcribe(video_path)
 
 segments = result["segments"]
 
-# 🔽 PEGA 5 PARTES
 cuts = segments[:5] if len(segments) >= 5 else segments
 
-# 🔽 CRIA CLIPES
+clips = []
+
+# CRIAR CLIPS
 for i, seg in enumerate(cuts):
     start, end = seg["start"], seg["end"]
-    os.system(f'ffmpeg -i "{video_path}" -ss {start} -to {end} -c copy "clips/clip_{i}.mp4"')
 
-print("clips gerados")
+    # 🔥 evita clip vazio
+    if end - start < 1:
+        continue
+
+    output = f"clips/clip_{i}.mp4"
+
+    cmd = f'ffmpeg -y -i "{video_path}" -ss {start} -to {end} -c:v libx264 -c:a aac "{output}"'
+    print("CMD:", cmd)
+
+    os.system(cmd)
+
+    # 🔥 só adiciona se existe
+    if os.path.exists(output):
+        clips.append(f"/clips/clip_{i}.mp4")
+
+# 🔥 retorna só os válidos
+print("CLIPS:", ",".join(clips))
